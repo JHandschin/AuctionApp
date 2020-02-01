@@ -9,9 +9,13 @@ All documentation will be located in the ```/docs``` directory.
 Version Control Procedures
 ------
 Our version control will take place with git on the GitHub platform.  During each of the milestones, we will meet together to do "sprint planning", in which we will determine tasks that need to be done.  All of these tasks will be placed in the "To Do" column of our project.
+
 During the course of the sprint, when we finish a task, we will pull one from the "To Do" column to the "In Progress" column, assigning ourselves to the ticket.
+
 When we assign ourselves to a ticket, we will create a new branch (the name of the branch will closely resemble the name of the ticket) on which we will perform our work.
+
 Work will be done on the tasks as normal, and when the task is complete, a pull request will be made to merge our task branch into the ```master``` branch.  On the pull request, the other team members will perform a peer review and either accept the pull request or request changes.  In order for a pull request to be merged back into the ```master``` branch, at least two other team members must approve the pull request.  A merge can never be done by the person who made the pull request.
+
 All merge conflicts must be dealt with on the task's branch, and not on the ```master``` branch.
 
 Tool Stack Description and Set Up Instructions
@@ -35,7 +39,6 @@ Vue is used to build user interfaces and single page applications
 To install Vue just use the script tag 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 in your html
-------
 
 Build Instructions
 ------
