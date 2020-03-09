@@ -1,0 +1,14 @@
+{
+  "name": "auctionhouse",
+  "version": "1.0.0",
+  "description": "an auction house app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "team 9",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
+}

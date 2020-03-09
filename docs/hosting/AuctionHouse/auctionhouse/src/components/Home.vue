@@ -14,7 +14,7 @@
 import db from '../firebase';
 require('firebase/firestore');
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   data() {
     return {
       greeting: 'Buy All The Things!!!',
@@ -26,7 +26,6 @@ export default {
   },
 
   created() {
-
     // Getting data from 'Item' Collection
     db.collection('Item').get()
     .then(querySnapshot => {
