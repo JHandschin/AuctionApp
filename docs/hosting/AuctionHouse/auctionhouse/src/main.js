@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import './../node_modules/foundation-sites/dist/css/foundation.min.css'
+import './../node_modules/foundation-sites/dist/js/foundation.min.js'
 
 import routes from './router/index'
 
