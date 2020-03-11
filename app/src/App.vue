@@ -5,7 +5,7 @@
       <!-- routes you created in src/router/index.js -->
       <router-link class="rLink button" to='/home'>Home</router-link>
       <router-link class="rLink button" to='/register'>Register</router-link>
-      <router-link class="rLink button alert" to='/login'>Login</router-link>
+      <router-link class="rLink button" to='/login'>Login</router-link>
     </div>
     <!-- components can be part of a greater component -->
     <!-- import component, have a components obj with component name, put in html as it's on tag -->
