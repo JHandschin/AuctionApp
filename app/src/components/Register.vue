@@ -22,10 +22,12 @@ export default {
     data() {
         return {
             users: [],
-            userName: '',
-            firstName: '',
-            lastName: '',
-            email: '',
+            userName: 'temp',
+            userPassword: 'temp',
+            firstName: 'temp',
+            lastName: 'temp',
+            email: 'temp',
+            phone: 'temp',
         }
     },
     methods: {
@@ -47,8 +49,13 @@ export default {
                         
                         const payload = {
                             userName: this.userName,
+                            userPassword: this.userPassword,
+                            isAdmin: false,
+                            isPresenter: false,
                             name: this.firstName + " " + this.lastName,
+                            phone: this.phone,
                             email: this.email,
+                            bids: [],
                         }
                         // Adding to 'User" Collection
                         db.collection('User').doc(this.userName).set(payload)
