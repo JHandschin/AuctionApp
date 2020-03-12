@@ -1,0 +1,115 @@
+@font-face {
+    font-family: cocogoose;
+    src: url("./cocogoose.ttf") format("truetype");
+}
+
+#main {
+    margin: 5% 5% 5% 5%;
+}
+
+body {
+    font-family: cocogoose;
+    color: black;
+    background-color: rgb(80, 147, 211);
+}
+
+#main #remaining-time {
+    color: rgb(75,75,75);
+}
+
+#main #item-info {
+    height: 400px;
+}
+
+#main #item-info #item-title-bid{
+    margin-left: 50%;
+}
+
+#main #item-info #item-title-bid #title {
+    font-size: 3em;
+    font-weight: bold;
+}
+#main #item-info #item-title-bid #cur-bid {
+    font-size: 2em;
+}
+#main #item-info #item-title-bid #bid-input {
+    font-family: cocogoose;
+    font-size: 1em;
+    line-height: 2em;
+    border: none;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+#main #item-info #item-title-bid #bid-input:focus {
+    outline: none;
+    border: 2px solid black;
+}
+
+#main #item-info #item-title-bid #bid-button {
+    font-family: cocogoose;
+    font-weight: bold;
+    font-size: 3.5em;
+    line-height: 2em;
+    width: 3em;
+    border: solid black 2px;
+    border-radius: 25px;
+    background-color: rgb(50,50,255);
+}
+#main #item-info #item-title-bid #bid-button:focus {
+    outline: none;
+}
+#main #item-info #item-title-bid #bid-button:active {
+    border: 2px solid white;
+    background-color: rgb(75,75,255);
+}
+
+#main #item-info #item-photo {
+    width: 400px;
+    height: 400px;
+    float: left;
+    border: solid black 2px;
+}
+
+#main #dialog {
+    font-size: 2em;
+    text-align: center;
+    background-color: blue;
+}
+#main #dialog #dialog-bid {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+#main #dialog::backdrop {
+    background-color: rgba(100,100,100,.5);
+}
+#main #dialog #ok-dialog-button {
+    width: 2em;
+}
+#main #dialog #ok-cancel-button {
+    width: 4em;
+}
+#main #dialog button {
+    margin-top: 1em;
+    font-family: cocogoose;
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 1.5em;
+    border: solid black 2px;
+    border-radius: 15px;
+    background-color: rgb(25,25,150);
+}
+#main #dialog button:focus {
+    outline: none;
+}
+#main #dialog button:active {
+    border: 2px solid white;
+    background-color: rgb(50,50,150);
+}
+
+.screen {
+    display: none;
+}
+.active {
+    display: block;
+}
