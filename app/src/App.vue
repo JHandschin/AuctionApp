@@ -7,6 +7,7 @@
       <router-link class="rLink button" to='/register'>Register</router-link>
       <router-link class="rLink button" to='/donate'>Donate</router-link>
       <router-link class="rLink button" to='/login'>Login</router-link>
+      <router-link class="rLink button" to='/item'>Item</router-link>
     </div>
     <!-- components can be part of a greater component -->
     <!-- import component, have a components obj with component name, put in html as it's on tag -->

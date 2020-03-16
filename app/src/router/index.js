@@ -5,6 +5,7 @@ import Register from '../components/Register.vue'
 import Home from '../components/Home.vue'
 import Donate from '../components/Donate.vue'
 import Login from '../components/Login.vue'
+import Item from '../components/Item.vue'
 
 Vue.use(Router)
 
@@ -14,6 +15,7 @@ const routes = [
   { path: '/register', component: Register },
   { path: '/donate', component: Donate },
   { path: '/login', component: Login },
+  { path: '/item', component: Item },
 ];
 
 export default routes;
