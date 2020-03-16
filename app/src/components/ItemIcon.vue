@@ -22,35 +22,35 @@ import db from '../firebase';
 require('firebase/firestore');
 export default {
     name: 'ItemIcon',
-    // props: ['title',
-    //         'description',
-    //         'currentBid',
-    //         'image'],
+    props: ['title',
+            'description',
+            'currentBid',
+            'image'],
     data() {
         return {
-            title: 'Test Title',
-            description: 'Test Description',
-            currentBid: '0.00',
+            // title: 'Test Title',
+            // description: 'Test Description',
+            // currentBid: '0.00',
             list: [],
         }
     },
     created() {
-        db.collection('Item').get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                console.log(doc.data());
-                const data = {
-                    description: doc.description,
-                    title: doc.title,
-                    bid: doc.price,
-                    image: doc.image
-                };
-                this.list.push(data);
-            });
-        })
-        .catch(error => {
-            console.log(error.data);
-        });
+        // db.collection('Item').get()
+        // .then(querySnapshot => {
+        //     querySnapshot.forEach(doc => {
+        //         console.log(doc.data());
+        //         const data = {
+        //             description: doc.description,
+        //             title: doc.title,
+        //             bid: doc.price,
+        //             image: doc.image
+        //         };
+        //         this.list.push(data);
+        //     });
+        // })
+        // .catch(error => {
+        //     // console.log(error.data);
+        // });
     }
 }
 </script>
@@ -60,6 +60,7 @@ export default {
         width: 20%;
         border: solid black 1px;
         margin-left: 40%;
+        margin-bottom: 3%;
     }
     .itemicon-image {
         border: solid black 1px;
