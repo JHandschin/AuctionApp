@@ -60,7 +60,6 @@ export default {
     .itemicon-container {
         height: 25%;
         width: 20%;
-        border: solid black 1px;
         margin-left: 40%;
         margin-bottom: 3%;
         float: left;
@@ -71,14 +70,11 @@ export default {
     .itemicon-title {
         font-size: 1em;
         font-weight: bold;
-        border: solid black 1px;
     }
     .itemicon-price {
         font-size: 1.5em;
-        border: solid black 1px;
     }
     .itemicon-description {
         font-size: .75em;
-        border: solid black 1px;
     }
 </style>

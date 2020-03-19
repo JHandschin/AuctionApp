@@ -96,18 +96,15 @@ export default {
     .item-title {
         font-size: 3em;
         font-weight: bold;
-        border: solid black 1px;
         height: 20%;
     }
     .item-description {
         font-size: 1em;
-        border: solid black 1px;
         height: 80%;
     }
     .item-price {
         font-size: 1.5em;
         font-weight: bolder;
-        border: solid black 1px;
         text-align: right;
     }
     .item-photo-container {
