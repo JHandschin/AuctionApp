@@ -58,23 +58,26 @@ export default {
 </script>
 <style scoped>
     .itemicon-container {
-        height: 25%;
-        width: 20%;
-        margin-left: 40%;
+        /* border: solid black 1px; */
+        height: 400px;
+        width: 300px;
         margin-bottom: 3%;
         float: left;
     }
     .itemicon-image {
-        border: solid black 1px;
+        /* border: solid black 1px; */
     }
     .itemicon-title {
+        /* border: solid black 1px; */
         font-size: 1em;
         font-weight: bold;
     }
     .itemicon-price {
+        /* border: solid black 1px; */
         font-size: 1.5em;
     }
     .itemicon-description {
+        /* border: solid black 1px; */
         font-size: .75em;
     }
 </style>

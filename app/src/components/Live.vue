@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="item-rows" v-for="item in list" :key="item.id">
+    <div class="item-rows">
+        <div class="item-icon" v-for="item in list" :key="item.id">
             <ItemIcon
                 :title="item.title"
                 :description="item.description"
@@ -55,6 +55,9 @@ export default {
 .item-rows {
     display: flex;
     flex-wrap: wrap;
+}
+.item-icon {
+    margin-left: 3%;
 }
 
 </style>
