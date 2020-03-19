@@ -87,6 +87,7 @@ export default {
     }
     .item-info-container {
         width: 100%;
+        margin-left: 3%;
     }
     .item-main-photo {
         height: 300px;
@@ -99,6 +100,7 @@ export default {
         height: 20%;
     }
     .item-description {
+        text-align: left;
         font-size: 1em;
         height: 80%;
     }
