@@ -5,7 +5,7 @@
                 <img id="item-image"/>
             </div>
             <div class="item-price">
-                <p>${{currentBid}} </p>
+                <p>{{currentBid}} </p>
                 <!-- <p>$ {{ currentBid }}</p> -->
             </div>
             <button class="button">Bid</button>
@@ -27,35 +27,54 @@ import db from '../firebase';
 require('firebase/firestore');
 export default {
     name: 'Item',
-    // props: ['title',
-    //         'description',
-    //         'currentBid',
-    //         'image'],
+    props: ['title',
+            'description',
+            'currentBid',
+            'image'],
     data() {
         return {
-            title: 'test title',
-            description: 'test description',
-            currentBid: '0.00',
-            list: [],
+            data: {
+                title: "title",
+                description: "description",
+                currentBid: "0.00"
+            },
         }
     },
     created() {
-        db.collection('Item').get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                console.log(doc.data());
-                const data = {
-                    description: doc.description,
-                    title: doc.title,
-                    bid: doc.price,
-                    image: doc.image
-                };
-                this.list.push(data);
-            });
-        })
-        .catch(error => {
-            console.log(error.data);
-        });
+        console.log(this.title);
+        console.log(this.description);
+        console.log(this.currentBid);
+        // let doc = db.collection('Item').doc("Bike test");
+        // let options = {
+        //     source: 'default',
+        // }
+
+        // doc.get(options)
+        // .then(d => {
+        //     console.log(d.data());
+        //     this.data.description = d.data().description;
+        //     this.data.title = d.data().title;
+        //     this.data.currentBid = d.data().price;
+        // })
+        // .catch(e => {
+        //     console.log(e.data);
+        // });
+        // db.collection('Item').get()
+        // .then(querySnapshot => {
+        //     querySnapshot.forEach(doc => {
+        //         //console.log(doc.data());
+        //         const data = {
+        //             description: doc.description,
+        //             title: doc.title,
+        //             bid: doc.price,
+        //             image: doc.image
+        //         };
+        //         this.list.push(data);
+        //     });
+        // })
+        // .catch(error => {
+        //     //console.log(error.data);
+        // });
     }
 }
 </script>

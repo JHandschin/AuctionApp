@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="item in list" :key="item.id">
+        <div class="item-rows" v-for="item in list" :key="item.id">
             <ItemIcon
                 :title="item.title"
                 :description="item.description"
@@ -34,7 +34,6 @@ export default {
         db.collection('Item').get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
-                console.log(doc.data());
                 if (!doc.data().isSilent) {
                     const data = {
                         description: doc.data().description,
@@ -53,5 +52,9 @@ export default {
 }
 </script>
 <style scoped>
+.item-rows {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 </style>

@@ -7,7 +7,13 @@
             id="main-image"/>
         </div>
         <div class="itemicon-title">
-            <p>{{title}}</p>
+            <router-link
+                :to="{ name: 'Item',
+                       params: { title: title,
+                                 description: description,
+                                 currentBid: currentBid} }">
+                {{title}}
+            </router-link>
         </div>
         <div class="itemicon-price">
             <p>{{currentBid}}</p>
@@ -31,25 +37,21 @@ export default {
             // title: 'Test Title',
             // description: 'Test Description',
             // currentBid: '0.00',
-            list: [],
+            data: {
+                title: "",
+                description: "",
+                currentBid: "",
+            }
         }
     },
     created() {
-        // db.collection('Item').get()
-        // .then(querySnapshot => {
-        //     querySnapshot.forEach(doc => {
-        //         console.log(doc.data());
-        //         const data = {
-        //             description: doc.description,
-        //             title: doc.title,
-        //             bid: doc.price,
-        //             image: doc.image
-        //         };
-        //         this.list.push(data);
-        //     });
+        console.log(this.title);
+        // db.collection('Item').get("Bike test")
+        // .then(doc => {
+        //     console.log(doc.data());
         // })
         // .catch(error => {
-        //     // console.log(error.data);
+        //     // //console.log(error.data);
         // });
     }
 }
@@ -61,6 +63,7 @@ export default {
         border: solid black 1px;
         margin-left: 40%;
         margin-bottom: 3%;
+        float: left;
     }
     .itemicon-image {
         border: solid black 1px;

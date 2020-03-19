@@ -17,9 +17,14 @@ const routes = [
   { path: '/register', component: Register },
   { path: '/donate', component: Donate },
   { path: '/login', component: Login },
-  { path: '/item', component: Item },
   { path: '/live', component: Live },
   { path: '/silent', component: Silent },
+  { 
+    path: '/item', 
+    name: 'Item',
+    component: Item,
+    props: true,
+  },
 ];
 
 export default routes;

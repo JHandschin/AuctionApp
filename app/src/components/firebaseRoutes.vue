@@ -57,22 +57,22 @@ export default {
             db.collection('Auction').get()
                 .then(querySnapshot => {
                     querySnapshot.forEach(doc => {
-                        console.log(doc.data());
+                        //console.log(doc.data());
                         this.list.push(this.Auction);
                     })
                 })
                 .catch(error => {
-                console.log(error.data);
+                //console.log(error.data);
             });
         },
         setAuction() {
             // Adding to 'Users" Collection
             db.collection('Auction').doc(this.Auction.date).set(this.Auction)
                 .then(function() {
-                console.log('success');
+                //console.log('success');
             })
                 .catch((error) => {
-                console.log('error' , error);
+                //console.log('error' , error);
             })
         },
 
