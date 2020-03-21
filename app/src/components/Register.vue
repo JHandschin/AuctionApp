@@ -7,7 +7,7 @@
         <input v-model="firstName" type="text" name="firstName" id="firstName" placeholder="First Name" >
         <div>Please enter your Last Name</div>
         <input v-model="lastName" type="text" name="lastName" id="lastName" placeholder="Last Name" >
-        <div>Please enter a User Name</div>
+        <div>Please enter your Email</div>
         <input v-model="email" type="text" name="email" id="email" placeholder="Email" >
         <button @click="submit" class="button">Submit</button>
     </div>
@@ -38,8 +38,9 @@ export default {
                 .then(querySnapshot => {
                     querySnapshot.forEach(doc => {
                         // console.log(doc.data());
-                        this.users.push(doc.data().user_name);
+                        this.users.push(doc.data().userName);
                     })
+                    console.log(this.users);
                 })
                 .then(() => {
                     if (this.users.includes(this.userName)) {
@@ -61,10 +62,10 @@ export default {
                         db.collection('User').doc(this.userName).set(payload)
                             .then(function() {
                             console.log('success');
-                        })
-                            .catch((error) => {
-                            console.log('error' , error);
-                            failed = true;
+                            })
+                                .catch((error) => {
+                                console.log('error' , error);
+                                failed = true;
                         })
                     }
                     if (failed) {
