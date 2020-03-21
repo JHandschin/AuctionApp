@@ -7,7 +7,13 @@
             id="main-image"/>
         </div>
         <div class="itemicon-title">
-            <p>{{title}}</p>
+            <router-link
+                :to="{ name: 'Item',
+                       params: { title: title,
+                                 description: description,
+                                 currentBid: currentBid} }">
+                {{title}}
+            </router-link>
         </div>
         <div class="itemicon-price">
             <p>{{currentBid}}</p>
@@ -22,59 +28,56 @@ import db from '../firebase';
 require('firebase/firestore');
 export default {
     name: 'ItemIcon',
-    // props: ['title',
-    //         'description',
-    //         'currentBid',
-    //         'image'],
+    props: ['title',
+            'description',
+            'currentBid',
+            'image'],
     data() {
         return {
-            title: 'Test Title',
-            description: 'Test Description',
-            currentBid: '0.00',
-            list: [],
+            // title: 'Test Title',
+            // description: 'Test Description',
+            // currentBid: '0.00',
+            data: {
+                title: "",
+                description: "",
+                currentBid: "",
+            }
         }
     },
     created() {
-        db.collection('Item').get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                console.log(doc.data());
-                const data = {
-                    description: doc.description,
-                    title: doc.title,
-                    bid: doc.price,
-                    image: doc.image
-                };
-                this.list.push(data);
-            });
-        })
-        .catch(error => {
-            console.log(error.data);
-        });
+        console.log(this.title);
+        // db.collection('Item').get("Bike test")
+        // .then(doc => {
+        //     console.log(doc.data());
+        // })
+        // .catch(error => {
+        //     // //console.log(error.data);
+        // });
     }
 }
 </script>
 <style scoped>
     .itemicon-container {
-        height: 25%;
-        width: 20%;
-        border: solid black 1px;
-        margin-left: 40%;
+        /* border: solid black 1px; */
+        height: 400px;
+        width: 300px;
+        margin-bottom: 3%;
+        float: left;
     }
     .itemicon-image {
-        border: solid black 1px;
+        /* border: solid black 1px; */
     }
     .itemicon-title {
+        /* border: solid black 1px; */
         font-size: 1em;
         font-weight: bold;
-        border: solid black 1px;
     }
     .itemicon-price {
+        /* border: solid black 1px; */
         font-size: 1.5em;
-        border: solid black 1px;
     }
     .itemicon-description {
+        /* border: solid black 1px; */
         font-size: .75em;
-        border: solid black 1px;
     }
 </style>

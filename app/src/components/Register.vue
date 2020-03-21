@@ -35,15 +35,15 @@ export default {
             db.collection('User').get()
                 .then(querySnapshot => {
                     querySnapshot.forEach(doc => {
-                        // console.log(doc.data());
+                        // //console.log(doc.data());
                         this.users.push(doc.data().user_name);
                     })
                 })
                 .then(() => {
                     if (this.users.includes(this.userName)) {
-                        console.log('Sorry, that user-name is already taken');
+                        //console.log('Sorry, that user-name is already taken');
                     } else {
-                        console.log('Gratz!!');
+                        //console.log('Gratz!!');
                         
                         const payload = {
                             userName: this.userName,
@@ -53,10 +53,10 @@ export default {
                         // Adding to 'User" Collection
                         db.collection('User').doc(this.userName).set(payload)
                             .then(function() {
-                            console.log('success');
+                            //console.log('success');
                         })
                             .catch((error) => {
-                            console.log('error' , error);
+                            //console.log('error' , error);
                             failed = true;
                         })
                     }
@@ -65,7 +65,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                console.log(error);
+                //console.log(error);
             });
         },
         cleansePage() {

@@ -111,7 +111,7 @@ export default {
     },
     methods: {
       submit() {
-        //console.log(this.isSilent);
+        ////console.log(this.isSilent);
         const payload = {
           name: this.name,
           phone: this.phone,
@@ -123,7 +123,7 @@ export default {
           isVerified: 'false',
         }
         db.collection('Item').doc(this.title).set(payload).then(function() {
-            console.log('success');
+            //console.log('success');
         })
       }
     }
