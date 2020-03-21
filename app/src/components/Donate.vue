@@ -83,7 +83,7 @@
   </div>
   <div class="grid-x grid-margin-x">
     <fieldset class="cell medium-12">
-      <button @click="submit" class="button float-left">Submit</button>
+      <button v-if="name !==''" @click="submit" class="button float-left">Submit</button>
     </fieldset>
   </div>
 
