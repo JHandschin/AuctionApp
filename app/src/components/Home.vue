@@ -43,17 +43,17 @@ export default {
       //console.log(error.data);
     });
 
-    // Adding to 'Users" Collection
-    db.collection('User').doc(this.userName).set({
-      user_name: this.userName,
-      name: this.first + ' ' + this.last,
-    })
-    .then(function() {
-      //console.log('success');
-    })
-    .catch(function(error) {
-      //console.log('error' , error);
-    })
+    // // Adding to 'Users" Collection
+    // db.collection('User').doc(this.userName).set({
+    //   user_name: this.userName,
+    //   name: this.first + ' ' + this.last,
+    // })
+    // .then(function() {
+    //   //console.log('success');
+    // })
+    // .catch(function(error) {
+    //   //console.log('error' , error);
+    // })
   },
 
   computed: {
