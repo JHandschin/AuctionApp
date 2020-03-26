@@ -37,13 +37,8 @@ export default {
             db.collection('User').get()
                 .then(querySnapshot => {
                     querySnapshot.forEach(doc => {
-<<<<<<< HEAD
                         // console.log(doc.data());
                         this.users.push(doc.data().userName);
-=======
-                        // //console.log(doc.data());
-                        this.users.push(doc.data().user_name);
->>>>>>> deb90af51e90173738a9c57c3982e755d29ec506
                     })
                     console.log(this.users);
                 })
@@ -66,19 +61,11 @@ export default {
                         // Adding to 'User" Collection
                         db.collection('User').doc(this.userName).set(payload)
                             .then(function() {
-<<<<<<< HEAD
                             console.log('success');
                             })
                                 .catch((error) => {
                                 console.log('error' , error);
                                 failed = true;
-=======
-                            //console.log('success');
-                        })
-                            .catch((error) => {
-                            //console.log('error' , error);
-                            failed = true;
->>>>>>> deb90af51e90173738a9c57c3982e755d29ec506
                         })
                     }
                     if (failed) {
