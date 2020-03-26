@@ -11,34 +11,34 @@
 
   <div class="grid-container">
     <div class="x-grid">
-      <h1>{{ msg }}</h1>
+      <!-- <h1>{{ msg }}</h1> -->
       <ul id="accordion" class="accordion" data-accordion>
         <li class="accordion-item is-active" data-accordion-item>
-          <a href="#" class="accordion-title">Accordion 1</a>
+          <a href="#" class="accordion-title">Watchlist</a>
           <div class="accordion-content" data-tab-content>
             <div class="item-rows">
-        <div class="item-icon" v-for="item in list" :key="item.id">
-            <ItemIcon
-                :title="item.title"
-                :description="item.description"
-                :currentBid="item.bid"
-            />
-        </div>
-    </div>
+              <div class="item-icon" v-for="item in list" :key="item.id">
+                  <ItemIcon
+                      :title="item.title"
+                      :description="item.description"
+                      :currentBid="item.bid"
+                  />
+              </div>
+            </div>
           </div>
         </li>
         <li class="accordion-item" data-accordion-item>
-          <a href="#" class="accordion-title">Accordion 2</a>
+          <a href="#" class="accordion-title">Winning</a>
           <div class="accordion-content" data-tab-content>
             <div class="item-rows">
-        <div class="item-icon" v-for="item in list" :key="item.id">
-            <ItemIcon
-                :title="item.title"
-                :description="item.description"
-                :currentBid="item.bid"
-            />
-        </div>
-    </div>
+              <div class="item-icon" v-for="item in list" :key="item.id">
+                  <ItemIcon
+                      :title="item.title"
+                      :description="item.description"
+                      :currentBid="item.bid"
+                  />
+              </div>
+            </div>
           </div>
         </li>
       </ul>
