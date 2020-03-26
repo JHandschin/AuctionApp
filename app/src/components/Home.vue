@@ -30,7 +30,6 @@ export default {
     db.collection('Item').get()
     .then(querySnapshot => {
       querySnapshot.forEach(doc => {
-        //console.log(doc.data());
         const data = {
           id: doc.id,
           title: doc.data().title,
@@ -40,20 +39,8 @@ export default {
       })
     })
     .catch(error => {
-      //console.log(error.data);
+      console.log(error.data);
     });
-
-    // // Adding to 'Users" Collection
-    // db.collection('User').doc(this.userName).set({
-    //   user_name: this.userName,
-    //   name: this.first + ' ' + this.last,
-    // })
-    // .then(function() {
-    //   //console.log('success');
-    // })
-    // .catch(function(error) {
-    //   //console.log('error' , error);
-    // })
   },
 
   computed: {
