@@ -1,7 +1,9 @@
 <template>
   <div id="app">
+
     <h1>Auction House App</h1>
     <div class="nav">
+
 
       <div class="app-heading grid-x">
         <div class="cell small-6 app-title">Auction House App</div>
@@ -20,44 +22,76 @@
         <router-link class="rLink button cell auto" to='/live'>Live</router-link>
         <router-link class="rLink button cell auto" to='/silent'>Silent</router-link>
         <router-link class="rlink button cell auto" to='/account'>Account</router-link>
+
       </div>
       
     <div class="main-content">
       <router-view />
     </div>
-    <!-- components can be part of a greater component -->
-    <!-- import component, have a components obj with component name, put in html as it's on tag -->
-    <InsideComponent value="I'm a value passed as a prop" />
-    <!-- value="I'm..." is a prop. Basically an object that can be used in the child -->
-    <router-view />
+
   </div>
 </template>
 
 <script>
-
-// All other components are from routerlink but if you want to
-// nest compoenets you can import them then just used them inside
-import InsideComponent from './components/InsideComponent.vue'
-
 export default {
   name: 'App',
   data() {
     return {
+      signedIn: false,
+    }
+  },
+  computed: {
+    bSignedIn() {
+      if (this.$store.state.initialized) {
+        return true;
+      }
+      return false;
+    },
+    fullName() {
+      const temp = this.$store.state.account;
+      return temp.userName;
     }
   },
   components: {
-    InsideComponent,
+  },
+  method: {
+  },
+  created() {
+    const temp = this.$store.state.initialized;
+    if (temp == false || temp == undefined) {
+      this.$router.push('/login');
+    }
   }
 }
 </script>
 
 <style>
+.app-title {
+  padding-left: 2rem;
+  padding-right: auto;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+}
+.user-greeting {
+  padding-right: 2rem;
+  padding-left: auto;
+  text-align: right;
+  font-size: 1.75rem;
+}
+.app-heading {
+  color: #e2edf1;
+  background-color: #7083bd;
+  height: 4rem;
+  line-height: 4rem;
+}
 .nav {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.rLink.button {
+a.rLink.button {
+  width: 6rem;
   padding: 1rem;
-  margin-right: 1rem;
   border-style: solid; 
 }
 #app {
@@ -66,6 +100,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: .5rem;
+}
+.main-content {
+  margin-top: 1rem;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 </style>
