@@ -24,7 +24,7 @@
         <router-link class="rlink button cell auto" to='/account'>Account</router-link>
 
       </div>
-      
+    </div>
     <div class="main-content">
       <router-view />
     </div>
