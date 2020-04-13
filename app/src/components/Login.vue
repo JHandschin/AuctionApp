@@ -1,5 +1,8 @@
 <template>
-    <h1>Login</h1>
+    <div class="content">
+        <h1>Login</h1>
+    
+    </div>
 </template>
 <script>
 export default {

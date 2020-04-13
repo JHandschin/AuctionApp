@@ -8,6 +8,7 @@ import Login from '../components/Login.vue'
 import Item from '../components/Item.vue'
 import Live from '../components/Live.vue'
 import Silent from '../components/Silent.vue'
+import Account from'../components/Account.vue'
 
 Vue.use(Router)
 
@@ -19,6 +20,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/live', component: Live },
   { path: '/silent', component: Silent },
+  { path: '/account', component: Account },
   { 
     path: '/item', 
     name: 'Item',
