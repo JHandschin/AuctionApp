@@ -104,9 +104,37 @@ export default {
                 db.collection('User').get()
                 .then(querySnapshot => {
                     querySnapshot.forEach(doc => {
-                        console.log(doc.data());
-                        this.userNamesList.push(doc.data().userName);
+                        // console.log(doc.data());
+                        this.users.push(doc.data().userName);
                     })
+                    console.log(this.users);
+                })
+                .then(() => {
+                    if (this.users.includes(this.userName)) {
+                        //console.log('Sorry, that user-name is already taken');
+                    } else {
+                        //console.log('Gratz!!');
+                        
+                        const payload = {
+                            userName: this.userName,
+                            userPassword: this.userPassword,
+                            isAdmin: false,
+                            isPresenter: false,
+                            name: this.firstName + " " + this.lastName,
+                            phone: this.phone,
+                            email: this.email,
+                            bids: [],
+                        }
+                        // Adding to 'User" Collection
+                        db.collection('User').doc(this.userName).set(payload)
+                            .then(function() {
+                            console.log('success');
+                            })
+                                .catch((error) => {
+                                console.log('error' , error);
+                                failed = true;
+                        })
+                    }
                     if (failed) {
                         this.cleansePage();
                     }
