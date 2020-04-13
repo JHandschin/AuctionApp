@@ -28,6 +28,8 @@ import { Accordion } from "foundation-sites"
 $(document).foundation();
 
 
+
+
 export default {
   name: 'accordion',
   mounted() {
@@ -46,7 +48,6 @@ export default {
     this.accordion.destroy();
   },
 };
-</script>
 
 <style lang="scss" scoped>
 </style>

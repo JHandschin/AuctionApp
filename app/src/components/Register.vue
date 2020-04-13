@@ -146,8 +146,10 @@ export default {
         },
         cleansePage() {
             this.userName = '';
+            this.userPassword = '';
             this.firstName = '';
             this.lastName = '';
+            this.phone = '';
             this.email = '';
         }
     },

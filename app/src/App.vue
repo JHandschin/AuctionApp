@@ -89,6 +89,9 @@ export default {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+a {
+  color: #293c48;
+}
 a.rLink.button {
   width: 6rem;
   padding: 1rem;

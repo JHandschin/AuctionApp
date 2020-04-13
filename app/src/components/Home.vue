@@ -88,6 +88,28 @@ export default {
     this.accordion.destroy();
   },
   created() {
+
+    // Getting data from 'Item' Collection
+    db.collection('Item').get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        const data = {
+          id: doc.id,
+          title: doc.data().title,
+          description: doc.data().description,
+        }
+        this.list.push(data);
+      })
+    })
+    .catch(error => {
+      console.log(error.data);
+    });
+  },
+
+  computed: {
+    itemList() {
+    // return this.list;
+
       db.collection('Item').get()
       .then(querySnapshot => {
           querySnapshot.forEach(doc => {
@@ -106,11 +128,10 @@ export default {
       .catch(error => {
           //console.log(error.data);
       });
-    }
+    },
   };
 
-</script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+// <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .item-rows {
     display: flex;
