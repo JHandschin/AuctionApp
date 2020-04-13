@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+
+    <h1>Auction House App</h1>
+    <div class="nav">
+
+
       <div class="app-heading grid-x">
         <div class="cell small-6 app-title">Auction House App</div>
         <div class="cell small-6 user-greeting">Welcome: 
@@ -16,8 +21,10 @@
         <router-link class="rLink button cell auto" to='/item'>Item</router-link>
         <router-link class="rLink button cell auto" to='/live'>Live</router-link>
         <router-link class="rLink button cell auto" to='/silent'>Silent</router-link>
+        <router-link class="rlink button cell auto" to='/account'>Account</router-link>
+
       </div>
-      
+    </div>
     <div class="main-content">
       <router-view />
     </div>
