@@ -36,6 +36,7 @@
 </template>
 <script>
 
+const admin = require('firebase/app');
 import db from '../firebase';
 require('firebase/firestore');
 
@@ -43,6 +44,7 @@ export default {
     name: 'Register',
     data() {
         return {
+            users: [],
             userNamesList: [],
             userName: '',
             userPassword: '',
@@ -52,6 +54,7 @@ export default {
             phone: '',
         }
     },
+
     watch: {
         userNamesList() {
             if (this.userNamesList.length > 0) {
@@ -111,36 +114,43 @@ export default {
                 })
                 .then(() => {
                     if (this.users.includes(this.userName)) {
-                        //console.log('Sorry, that user-name is already taken');
+                        console.log('Sorry, that user-name is already taken');
                     } else {
-                        //console.log('Gratz!!');
-                        
-                        const payload = {
-                            userName: this.userName,
-                            userPassword: this.userPassword,
-                            isAdmin: false,
-                            isPresenter: false,
-                            name: this.firstName + " " + this.lastName,
-                            phone: this.phone,
-                            email: this.email,
-                            bids: [],
-                        }
-                        // Adding to 'User" Collection
-                        db.collection('User').doc(this.userName).set(payload)
-                            .then(function() {
-                            console.log('success');
+                        admin.auth().createUserWithEmailAndPassword(this.email, this.userPassword)
+                        .then(() => {
+                            const payload = {
+                                userName: this.userName,
+                                userPassword: this.userPassword,
+                                isAdmin: false,
+                                isPresenter: false,
+                                name: this.firstName + " " + this.lastName,
+                                phone: this.phone,
+                                email: this.email,
+                                bids: [],
+                            }
+                            db.collection('User').doc(this.userName).set(payload)
+                                .then(function() {
+                                console.log('success');
+                                })
+                                    .catch((error) => {
+                                    console.log('error' , error);
+                                    failed = true;
                             })
-                                .catch((error) => {
-                                console.log('error' , error);
-                                failed = true;
+                            this.$store.commit('updateAccount', payload);
+                            this.$router.push('/home');
                         })
-                    }
-                    if (failed) {
-                        this.cleansePage();
+                        .catch(function(error) {
+                            // Handle Errors here.
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            console.log("Error code: ", errorCode);
+                            console.log("ErrorMessage: ", errorMessage);
+                        });
+
                     }
                 })
                 .catch(error => {
-                console.log(error);
+                    console.log(error);
                 });
             }
         },

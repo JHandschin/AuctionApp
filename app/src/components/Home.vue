@@ -64,6 +64,7 @@ function formatNum(num) {
     });
     return formatter.format(num);
 }
+
 export default {
   name: 'accordion',
   components: {
@@ -108,36 +109,18 @@ export default {
 
   computed: {
     itemList() {
-    // return this.list;
-
-      db.collection('Item').get()
-      .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-              //console.log(doc.data());
-              if (doc.data().isSilent) {
-                  const data = {
-                      description: doc.data().description,
-                      title: doc.data().title,
-                      bid: formatNum(doc.data().price),
-                      image: doc.data().image
-                  };
-                  this.list.push(data);
-              }
-          })
-      })
-      .catch(error => {
-          //console.log(error.data);
-      });
+      return this.list;
     },
-  };
+  },
+};
+</script>
 
-// <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.item-rows {
+<styles scoped>
+  .item-rows {
     display: flex;
     flex-wrap: wrap;
-}
-.item-icon {
+  }
+  .item-icon {
     margin-left: 3%;
-}
-</style>
+  }
+</styles>

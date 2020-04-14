@@ -8,10 +8,14 @@
         </div>
         <div class="itemicon-title">
             <router-link
-                :to="{ name: 'Item',
-                       params: { title: title,
-                                 description: description,
-                                 currentBid: currentBid} }">
+                :to="{ 
+                    name: 'Item',
+                    params: { 
+                        title: title,
+                        description: description,
+                        currentBid: currentBid
+                    } 
+                }">
                 {{title}}
             </router-link>
         </div>

@@ -1,34 +1,29 @@
 <template>
   <div id="app">
-
-    <h1>Auction House App</h1>
     <div class="nav">
-
-
       <div class="app-heading grid-x">
         <div class="cell small-6 app-title">Auction House App</div>
         <div class="cell small-6 user-greeting">Welcome: 
           <span v-if="bSignedIn">{{fullName}}</span>
-          <router-link v-else class="" to='/login'>Sign In</router-link>
+          <!-- <router-link v-else class="" to='/login'>Sign In</router-link> -->
         </div>
       </div>
       <div class="nav grid-margin-x">
         <!-- routes you created in src/router/index.js -->
-        <router-link class="rLink button cell auto" to='/home'>Home</router-link>
-        <router-link class="rLink button cell auto" to='/register'>Register</router-link>
-        <router-link class="rLink button cell auto" to='/donate'>Donate</router-link>
-        <router-link class="rLink button cell auto" to='/login'>Login</router-link>
-        <router-link class="rLink button cell auto" to='/item'>Item</router-link>
-        <router-link class="rLink button cell auto" to='/live'>Live</router-link>
-        <router-link class="rLink button cell auto" to='/silent'>Silent</router-link>
-        <router-link class="rlink button cell auto" to='/account'>Account</router-link>
-
+        <router-link class="rLink button cell small-1" to='/home'>Home</router-link>
+        <router-link class="rLink button cell small-1" to='/donate'>Donate</router-link>
+        <router-link class="rLink button cell small-1" to='/item'>Item</router-link>
+        <router-link class="rLink button cell small-1" to='/live'>Live</router-link>
+        <router-link class="rLink button cell small-1" to='/silent'>Silent</router-link>
+        <router-link class="rLink button cell small-1" to='/account'>Account</router-link>
+        <router-link class="rLink button cell small-1" to='/register'>Register</router-link>
+        <router-link class="rLink button cell small-1" to='/login'>Login</router-link>
+        <router-link v-if="bIsAdmin" class="rLink button cell small-1" to='/adminRights'>Admin Rights</router-link>
       </div>
     </div>
     <div class="main-content">
       <router-view />
     </div>
-
   </div>
 </template>
 
@@ -43,6 +38,12 @@ export default {
   computed: {
     bSignedIn() {
       if (this.$store.state.initialized) {
+        return true;
+      }
+      return false;
+    },
+    bIsAdmin() {
+      if (this.$store.state.account.isAdmin) {
         return true;
       }
       return false;

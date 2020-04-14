@@ -9,6 +9,7 @@ import Item from '../components/Item.vue'
 import Live from '../components/Live.vue'
 import Silent from '../components/Silent.vue'
 import Account from'../components/Account.vue'
+import AdminRights from'../components/AdminRights.vue'
 
 Vue.use(Router)
 
@@ -21,6 +22,7 @@ const routes = [
   { path: '/live', component: Live },
   { path: '/silent', component: Silent },
   { path: '/account', component: Account },
+  { path: '/adminrights', component: AdminRights },
   { 
     path: '/item', 
     name: 'Item',

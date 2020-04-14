@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase'
 import 'firebase/firestore'
 
 const firebaseConfig = {
@@ -14,7 +14,8 @@ const firebaseConfig = {
 
   const firebaseApp = firebase.initializeApp(firebaseConfig);
   const firestore = firebaseApp.firestore();
-  require('firebase/firestore')
+  require('firebase/firestore');
+  require('firebase/auth');
   export default firestore;
 
 // to deploy vue.js app with firebase hosting

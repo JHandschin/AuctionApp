@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "firebase": "^7.9.2",
+    "firebase": "^7.14.0",
+    "firebase-admin": "^8.10.0",
     "foundation-sites": "^6.6.1",
     "jquery": "^3.4.1",
     "vue": "^2.6.11",
