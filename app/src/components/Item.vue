@@ -5,18 +5,18 @@
                 <img id="item-image"/>
             </div>
             <div class="item-price">
-                <p>{{currentBid}} </p>
-                <!-- <p>$ {{ currentBid }}</p> -->
+                <p id="cur-bid">{{currentBid}} </p>
             </div>
-            <button class="button">Bid</button>
+            <div class="bidding-items">
+                <input id="bid-amount" type="text" placeholder="Bid Amount"/>
+                <button v-on:click="bid()" class="button">Bid</button>
+            </div>
         </div>
         <div class="item-info-container">
             <div class="item-title">
-                <!-- <h1>{{ title }}</h1> -->
                 <h1>{{title}}</h1>
             </div>
             <div class="item-description">
-                <!-- <p>{{ description }}</p> -->
                 <p>{{description}}</p>
             </div>
         </div>
@@ -25,12 +25,53 @@
 <script>
 import db from '../firebase';
 require('firebase/firestore');
+
+function unFormatNum(num) {
+    return Number(num.replace("$",""));
+}
+
+function formatNum(num) {
+    let formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+    return formatter.format(num);
+}
+
 export default {
     name: 'Item',
     props: ['title',
             'description',
             'currentBid',
             'image'],
+    methods: {
+        bid() {
+            let bidAmt = document.getElementById("bid-amount").value;
+            if (!isNaN(Number(bidAmt))) {
+                let bid = unFormatNum(this.currentBid);
+                if (!isNaN(bid) && Number(bidAmt) <= bid) {
+                    alert("Please enter a bid amount greater than the current bid.");
+                }
+                else {
+                    let itemRef = db.collection('Item').doc(this.title);
+                    let options = {
+                        source: 'default',
+                    };
+                    itemRef.update({
+                        price: Number(bidAmt).toString(),
+                    });
+
+                    document.getElementById('cur-bid').innerHTML = formatNum(bidAmt);
+                    document.getElementById('bid-amount').value = '';
+
+                    // window.location.reload();
+                }
+            }
+            else {
+                alert("Please enter a valid bid amount.");
+            }
+        },
+    },
     data() {
         return {
             data: {
@@ -41,40 +82,7 @@ export default {
         }
     },
     created() {
-        console.log(this.title);
-        console.log(this.description);
-        console.log(this.currentBid);
-        // let doc = db.collection('Item').doc("Bike test");
-        // let options = {
-        //     source: 'default',
-        // }
-
-        // doc.get(options)
-        // .then(d => {
-        //     console.log(d.data());
-        //     this.data.description = d.data().description;
-        //     this.data.title = d.data().title;
-        //     this.data.currentBid = d.data().price;
-        // })
-        // .catch(e => {
-        //     console.log(e.data);
-        // });
-        // db.collection('Item').get()
-        // .then(querySnapshot => {
-        //     querySnapshot.forEach(doc => {
-        //         //console.log(doc.data());
-        //         const data = {
-        //             description: doc.description,
-        //             title: doc.title,
-        //             bid: doc.price,
-        //             image: doc.image
-        //         };
-        //         this.list.push(data);
-        //     });
-        // })
-        // .catch(error => {
-        //     //console.log(error.data);
-        // });
+        // Empty
     }
 }
 </script>
@@ -111,5 +119,8 @@ export default {
     }
     .item-photo-container {
         text-align: right;
+    }
+    .bidding-items{
+        display: flex;
     }
 </style>

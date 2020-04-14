@@ -68,9 +68,9 @@ export default {
         margin-bottom: 3%;
         float: left;
     }
-    .itemicon-image {
+    /* .itemicon-image { */
         /* border: solid black 1px; */
-    }
+    /* } */
     .itemicon-title {
         /* border: solid black 1px; */
         font-size: 1em;

@@ -106,7 +106,7 @@ export default {
             price: '',
             title: '',
             description: '',
-            isSilent: '',
+            isSilent: true,
         }
     },
     methods: {
@@ -120,9 +120,9 @@ export default {
           title: this.title,
           description: this.description,
           isSilent: this.isSilent,
-          isVerified: 'false',
+          isVerified: false,
         }
-        db.collection('Item').doc().set(payload).then(function() {
+        db.collection('Item').doc(this.title).set(payload).then(function() {
             //console.log('success');
         })
       }
