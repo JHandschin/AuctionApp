@@ -106,32 +106,34 @@ export default {
     });
   },
 
-  computed: {
-    itemList() {
-    // return this.list;
+  // computed: {
+  //   itemList() {
+  //   // return this.list;
 
-      db.collection('Item').get()
-      .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-              //console.log(doc.data());
-              if (doc.data().isSilent) {
-                  const data = {
-                      description: doc.data().description,
-                      title: doc.data().title,
-                      bid: formatNum(doc.data().price),
-                      image: doc.data().image
-                  };
-                  this.list.push(data);
-              }
-          })
-      })
-      .catch(error => {
-          //console.log(error.data);
-      });
-    },
-  };
+  //     db.collection('Item').get()
+  //     .then(querySnapshot => {
+  //         querySnapshot.forEach(doc => {
+  //             //console.log(doc.data());
+  //             if (doc.data().isSilent) {
+  //                 const data = {
+  //                     description: doc.data().description,
+  //                     title: doc.data().title,
+  //                     bid: formatNum(doc.data().price),
+  //                     image: doc.data().image
+  //                 };
+  //                 this.list.push(data);
+  //             }
+  //         })
+  //     })
+  //     .catch(error => {
+  //         //console.log(error.data);
+  //     });
+  //   },
+  }
 
-// <!-- Add "scoped" attribute to limit CSS to this component only -->
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .item-rows {
     display: flex;

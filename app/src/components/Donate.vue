@@ -122,7 +122,7 @@ export default {
           isSilent: this.isSilent,
           isVerified: 'false',
         }
-        db.collection('Item').doc().set(payload).then(function() {
+        db.collection('Item').doc(this.title).set(payload).then(function() {
             //console.log('success');
         })
       }
