@@ -126,6 +126,8 @@ export default {
                                 name: this.firstName + " " + this.lastName,
                                 phone: this.phone,
                                 email: this.email,
+                                adminPetition: false,
+                                presenterPetition: false,
                                 bids: [],
                             }
                             db.collection('User').doc(this.userName).set(payload)
