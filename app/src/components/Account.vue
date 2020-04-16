@@ -15,9 +15,7 @@
     <div class="cell small-6">
       <span v-if="editUserName">
         <input type="text" v-model="updatedUserName">
-        <button class="button" @click="update('userName')">
-          submit
-        </button>
+        <button class="button" @click="update('userName')">submit</button>
       </span>
       </div>
     </div>
@@ -27,16 +25,14 @@
     <div @click="editPassword=!editPassword">
       {{userPassword}}
     </div>
-    </div>
+  </div>
       <div class="cell small-6">
         <span v-if="editPassword">
           <input type="text" v-model="updatedPassword">
-          <button class="button" @click="update('userPassword')">
-            submit
-            </button>
+          <button class="button" @click="update('userPassword')">submit</button>
         </span>
-        </div>
-        </div> 
+      </div>
+    </div> 
 
     <div class="grid-x grid-margin-x">
     <div class="cell small-6">
@@ -105,16 +101,33 @@
         </div> 
 
 
-    <div>
-      {{isAdmin}}
+    <div class="grid-x grid-margin-x bar">
+      <div class="cell small-6 text-align big">
+        Rights that you have access to.
+      </div>
+      <div class="cell small-6 button-align big">
+        If False, you may submit to be upgraded.
+      </div>
     </div>
 
-    <div>
-      {{isPresenter}}
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-6 text-align">
+        Aministration Rights: {{isAdmin}}
+      </div>
+      <div v-if="!isAdmin" class="cell small-6">
+        <button class="button button-align" @click="petitionAdmin" >Petition for Admin</button>
+      </div>
     </div>
-    <div>
-      {{bids}}
+
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-6 text-align">
+        Presenter Rights: {{isPresenter}}
+      </div>
+      <div v-if="!isPresenter" class="cell small-6">
+        <button class="button button-align" @click="petitionPresenter">Petition for Presenter</button>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -159,21 +172,9 @@ export default {
       })
     })
     .catch(error => {
-      //console.log(error.data);
+      console.log(error.data);
     });
   
-
-    // // Adding to 'Users" Collection
-    // db.collection('User').doc(this.userName).set({
-    //   user_name: this.userName,
-    //   name: this.first + ' ' + this.last,
-    // })
-    // .then(function() {
-    //   //console.log('success');
-    // })
-    // .catch(function(error) {
-    //   //console.log('error' , error);
-    // })
   },
 
   computed: {
@@ -220,6 +221,20 @@ export default {
   },
 
   methods: {
+    petitionAdmin() {
+      console.log("petition clicked");
+      const itemRef = db.collection("User").doc(this.$store.state.account.userName);
+      const setWithMerge = itemRef.set({
+        adminPetition: true
+      }, {merge: true });
+    },
+    petitionPresenter() {
+      console.log("presenter clicked");
+      const itemRef = db.collection("User").doc(this.$store.state.account.userName);
+      const setWithMerge = itemRef.set({
+        presenterPetition: true
+      }, {merge: true });
+    },
       update(item)
       {
         console.log(item)
@@ -260,6 +275,28 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.big.text-align {
+  font-size: x-large;
+  margin-top: 0;
+}
+.big.button-align {
+  font-size: x-large;
+}
+.text-align {
+  display: flex;
+  justify-content: flex-end;
+  font-size: large;
+  margin-top: .55rem;
+}
+.button-align {
+  display: flex;
+  justify-content: left;
+}
+.bar {
+  margin-top: 3rem;
+  font-size: x-large;
+  margin-bottom: 1rem;
+}
 h3 {
   margin: 50px 0 0;
 }
