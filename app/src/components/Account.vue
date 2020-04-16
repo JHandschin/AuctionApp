@@ -6,134 +6,160 @@
     <!-- <div v-for="item in itemList" :key="item.id">
       <div class="button" @click="update(item)">Name: {{item.userName}} Email: {{item.email}}</div>
     </div> -->
-    <div class="grid-x grid-margin-x">
+    <div v-if="!makeAuction">
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+          <div class="heading">Please click category You would like to change.</div>
+        </div>
+        <div class="cell small-6">
+          <div><button @click="makeAuction=true" class="button">Submit a new Auction</button></div>
+        </div>
+      </div>
+
+
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+          <div @click="editUserName=!editUserName">
+            {{userName}}
+          </div>
+      </div>
       <div class="cell small-6">
-    <div @click="editUserName=!editUserName">
-      {{userName}}
-    </div>
-    </div>
-    <div class="cell small-6">
-      <span v-if="editUserName">
-        <input type="text" v-model="updatedUserName">
-        <button class="button" @click="update('userName')">submit</button>
-      </span>
+        <span v-if="editUserName">
+          <input type="text" v-model="updatedUserName">
+          <button class="button" @click="update('userName')">submit</button>
+        </span>
+        </div>
       </div>
-    </div>
-    
-    <div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-    <div @click="editPassword=!editPassword">
-      {{userPassword}}
-    </div>
-  </div>
+      
+      <div class="grid-x grid-margin-x">
       <div class="cell small-6">
-        <span v-if="editPassword">
-          <input type="text" v-model="updatedPassword">
-          <button class="button" @click="update('userPassword')">submit</button>
-        </span>
+      <div @click="editPassword=!editPassword">
+        {{userPassword}}
       </div>
-    </div> 
-
-    <div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-    <div @click="editFirst=!editFirst">
-      {{firstName}}
     </div>
-    </div>
-    <div class="cell small-6">
-      <span v-if="editFirst">
-          <input type="text" v-model="updatedFirst">
-          <button class="button" @click="update('firstName')">
-            submit
-            </button>
-        </span>
+        <div class="cell small-6">
+          <span v-if="editPassword">
+            <input type="text" v-model="updatedPassword">
+            <button class="button" @click="update('userPassword')">submit</button>
+          </span>
         </div>
-        </div> 
+      </div> 
+
+      <div class="grid-x grid-margin-x">
+      <div class="cell small-6">
+      <div @click="editFirst=!editFirst">
+        {{firstName}}
+      </div>
+      </div>
+      <div class="cell small-6">
+        <span v-if="editFirst">
+            <input type="text" v-model="updatedFirst">
+            <button class="button" @click="update('firstName')">
+              submit
+              </button>
+          </span>
+          </div>
+          </div> 
 
 
-    <div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-    <div @click="editLast=!editLast">
-      {{lastName}}
-    </div>
-    </div>
-     <div class="cell small-6">
-      <span v-if="editLast">
-          <input type="text" v-model="updatedLast">
-          <button class="button" @click="update('lastName')">
-            submit
-            </button>
-        </span>
+      <div class="grid-x grid-margin-x">
+      <div class="cell small-6">
+      <div @click="editLast=!editLast">
+        {{lastName}}
+      </div>
+      </div>
+      <div class="cell small-6">
+        <span v-if="editLast">
+            <input type="text" v-model="updatedLast">
+            <button class="button" @click="update('lastName')">
+              submit
+              </button>
+          </span>
+          </div>
+          </div> 
+
+      <div class="grid-x grid-margin-x">
+      <div class="cell small-6">
+      <div @click="editEmail=!editEmail">
+        {{email}}
+      </div>
+      </div>
+      <div class="cell small-6">
+        <span v-if="editEmail">
+            <input type="text" v-model="updatedEmail">
+            <button class="button" @click="update('email')">
+              submit
+              </button>
+          </span>
+          </div>
+          </div> 
+
+
+      <div class="grid-x grid-margin-x">
+      <div class="cell small-6">
+      <div @click="editPhone=!editPhone">
+        {{phone}}
+      </div>
+      </div>
+      <div class="cell small-6">
+        <span v-if="editPhone">
+            <input type="text" v-model="updatedPhone">
+            <button class="button" @click="update('phone')">
+              submit
+              </button>
+          </span>
+          </div>
+          </div> 
+
+
+      <div class="grid-x grid-margin-x bar">
+        <div class="cell small-6 text-align big">
+          Rights that you have access to.
         </div>
-        </div> 
-
-    <div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-    <div @click="editEmail=!editEmail">
-      {{email}}
-    </div>
-    </div>
-    <div class="cell small-6">
-      <span v-if="editEmail">
-          <input type="text" v-model="updatedEmail">
-          <button class="button" @click="update('email')">
-            submit
-            </button>
-        </span>
+        <div class="cell small-6 button-align big">
+          If False, you may submit to be upgraded.
         </div>
-        </div> 
+      </div>
 
-
-    <div class="grid-x grid-margin-x">
-    <div class="cell small-6">
-    <div @click="editPhone=!editPhone">
-      {{phone}}
-    </div>
-    </div>
-    <div class="cell small-6">
-      <span v-if="editPhone">
-          <input type="text" v-model="updatedPhone">
-          <button class="button" @click="update('phone')">
-            submit
-            </button>
-        </span>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6 text-align">
+          Aministration Rights: {{isAdmin}}
         </div>
-        </div> 
-
-
-    <div class="grid-x grid-margin-x bar">
-      <div class="cell small-6 text-align big">
-        Rights that you have access to.
+        <div v-if="!isAdmin" class="cell small-6">
+          <button class="button button-align" @click="petitionAdmin" >Petition for Admin</button>
+        </div>
       </div>
-      <div class="cell small-6 button-align big">
-        If False, you may submit to be upgraded.
+
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6 text-align">
+          Presenter Rights: {{isPresenter}}
+        </div>
+        <div v-if="!isPresenter" class="cell small-6">
+          <button class="button button-align" @click="petitionPresenter">Petition for Presenter</button>
+        </div>
       </div>
     </div>
 
-    <div class="grid-x grid-margin-x">
-      <div class="cell small-6 text-align">
-        Aministration Rights: {{isAdmin}}
-      </div>
-      <div v-if="!isAdmin" class="cell small-6">
-        <button class="button button-align" @click="petitionAdmin" >Petition for Admin</button>
-      </div>
+    <div v-else-if="makeAuction===true">
+      <div class="grid-x grid-margin-x">
+            <div class="cell small-6">
+                <div>Please enter School</div>
+                <input v-model="school" type="text" name="school" id="school" placeholder="Unique User Name" >
+            </div>
+            <div class="cell small-6">
+                <div>Please enter a Date</div>
+                <input v-model="date" type="date" id="time" min="2020-4-1" max="2020-12-31">
+            </div>
+        </div>
+        <button @click="submit" class="button left-align">Submit</button>
     </div>
-
-    <div class="grid-x grid-margin-x">
-      <div class="cell small-6 text-align">
-        Presenter Rights: {{isPresenter}}
-      </div>
-      <div v-if="!isPresenter" class="cell small-6">
-        <button class="button button-align" @click="petitionPresenter">Petition for Presenter</button>
-      </div>
-    </div>
-
   </div>
 </template>
 
 <script>
 import db from '../firebase';
 require('firebase/firestore');
+
 export default {
   name: 'Account',
   data() {
@@ -155,6 +181,9 @@ export default {
       updatedEmail: "",
       first: '',
       last: '',
+      makeAuction: false,
+      school: "",
+      date: Date(Date.now()),
     }
   },
 
@@ -216,11 +245,28 @@ export default {
     bids(){
       return this.$store.state.account.bids;
     },
-
-
   },
 
   methods: {
+    submit() {
+      console.log("School", this.school, ", Date: ", this.date);
+      const data = {
+        host: this.userName,
+        email: this.email,
+        phone: this.phone,
+        date: this.date,
+        school: this.school,
+        isApproved: false,
+        isActive: false,
+      }
+      db.collection("Auction").doc().set(data)
+      .then(() => {
+        console.log("success.");
+      })
+      .catch(() => {
+        console.log("failure.");
+      })
+    },
     petitionAdmin() {
       console.log("petition clicked");
       const itemRef = db.collection("User").doc(this.$store.state.account.userName);
@@ -275,6 +321,10 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.heading {
+  border-bottom: 2px solid black;
+  font-size: large;
+}
 .big.text-align {
   font-size: x-large;
   margin-top: 0;

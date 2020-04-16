@@ -3,10 +3,11 @@
     <div class="heading">Admin Privileges</div> 
 
     <div class="grid-x grid-margin-x">
-      <button @click="verifyToggle=!verifyToggle,adminToggle=false,auctionToggle=false,presenterToggle=false" class="button cell auto">Verify Items</button>
-      <button @click="adminToggle=!adminToggle,verifyToggle=false,auctionToggle=false,presenterToggle=false" class="button cell auto">Adminerize Users</button>
-      <button @click="presenterToggle=!presenterToggle,verifyToggle=false,adminToggle=false,auctionToggle=false" class="button cell auto">Presenterize Users</button>
-      <button @click="auctionToggle=!auctionToggle,verifyToggle=false,adminToggle=false,presenterToggle=false" class="button cell auto">Approve Auction</button>
+      <button @click="verifyToggle=!verifyToggle,adminToggle=false,auctionToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Verify Items</button>
+      <button @click="adminToggle=!adminToggle,verifyToggle=false,auctionToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Adminerize Users</button>
+      <button @click="presenterToggle=!presenterToggle,verifyToggle=false,adminToggle=false,auctionToggle=false,startStop=false" class="button cell auto">Presenterize Users</button>
+      <button @click="auctionToggle=!auctionToggle,verifyToggle=false,adminToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Approve Auction</button>
+      <button @click="startStop=!startStop,verifyToggle=false,adminToggle=false,presenterToggle=false,auctionToggle=false" class="button cell auto">Approve Auction</button>
     </div>
 
     <div v-if="verifyToggle">
@@ -81,7 +82,7 @@
         <div class="cell small-2">Phone</div>
         <div class="cell small-2">Approve</div>
       </div>
-      <ul v-for="item in auctionList" :key='item.uid'>
+      <ul v-for="item in auctionList" :key='item.id'>
         <div class="grid-x grid-margin-x row">
           <div class="cell small-2">{{item.school}} </div>
           <div class="cell small-2">{{item.date | dateFilter}}</div>
@@ -89,6 +90,30 @@
           <div class="cell small-2">{{item.email}}</div>
           <div class="cell small-2">{{item.phone}}</div>
           <div class="cell small-2"><button @click="approveAuction(item)" class="button vert-align">Approve</button></div>
+        </div>
+      </ul>
+    </div>
+
+    <div v-if="startStop">
+      <div class="grid-x grid-margin-x list-heading">
+        <div class="cell small-1">School</div>
+        <div class="cell small-2">Date</div>
+        <div class="cell small-2">Host</div>
+        <div class="cell small-2">Email</div>
+        <div class="cell small-2">Phone</div>
+        <div class="cell small-1">Active</div>
+        <div class="cell small-2">Action</div>
+      </div>
+      <ul v-for="item in auctionList" :key='item.id'>
+        <div class="grid-x grid-margin-x row">
+          <div class="cell small-1">{{item.school}} </div>
+          <div class="cell small-2">{{item.date | dateFilter}}</div>
+          <div class="cell small-2">{{item.host}}</div>
+          <div class="cell small-2">{{item.email}}</div>
+          <div class="cell small-2">{{item.phone}}</div>
+          <div class="cell small-1">{{item.isActive}}</div>
+          <div v-if="!item.isActive" class="cell small-2"><button @click="startAuction(item)" class="button vert-align">Start</button></div>
+          <div v-else class="cell small-2"><button @click="endAuction(item)" class="button vert-align">End</button></div>
         </div>
       </ul>
     </div>
@@ -109,17 +134,16 @@ export default {
           adminToggle: false,
           presenterToggle: false,
           auctionToggle: false,
+          startStop: false,
           items: [],
           users: [],
           presenters: [],
-          autions: [],
+          auctions: [],
       }
   },
   filters: {
     dateFilter(date) {
-      let d = (new Date(1970,0,1));
-      d.setSeconds(date.seconds);
-      console.log("Seconds: ", d, "DateConv: ", d);
+      let d = (new Date(date));
       return d.toDateString();
     },
     priceFilter(price) {
@@ -154,8 +178,8 @@ export default {
       }, {merge: true });
     },
     approveAuction(item) {
-      this.auctions.splice(this.auctions.findIndex(obj => obj.uid === item.uid),1);
-      const itemRef = db.collection("Auction").doc(item.uid);
+      this.auctions.splice(this.auctions.findIndex(obj => obj.id === item.id),1);
+      const itemRef = db.collection("Auction").doc(item.id);
       const setWithMerge = itemRef.set({
         isApproved: true,
       }, {merge: true });
@@ -236,11 +260,13 @@ export default {
     auctionToggle() {
       if (this.auctionToggle === true) {
         this.auctions = [];
+        console.log("auctions received.");
         db.collection("Auction").where("isApproved", "==", false).get()
         .then(querySnapshot => {
             querySnapshot.forEach((doc) => {
                 const item = doc.data();
-                this.auctions.push(doc.data());
+                item["id"] = doc.id;
+                this.auctions.push(item);
                 console.log(doc.id, " => ", doc.data());
             });
         })
@@ -253,7 +279,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .vert-align {
   margin-top: 0rem;
   margin-bottom: auto;
