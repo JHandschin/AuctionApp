@@ -13,7 +13,8 @@
                     params: { 
                         title: title,
                         description: description,
-                        currentBid: currentBid
+                        currentBid: currentBid,
+                        isSilent: isSilent,
                     } 
                 }">
                 {{title}}
@@ -35,7 +36,8 @@ export default {
     props: ['title',
             'description',
             'currentBid',
-            'image'],
+            'image',
+            'isSilent'],
     data() {
         return {
             // title: 'Test Title',
@@ -45,11 +47,13 @@ export default {
                 title: "",
                 description: "",
                 currentBid: "",
+                isSilent: true,
             }
         }
     },
     created() {
-        console.log(this.title);
+        // console.log(this.title);
+        // console.log(this.currentBid);
         // db.collection('Item').get("Bike test")
         // .then(doc => {
         //     console.log(doc.data());

@@ -5,6 +5,7 @@
                 :title="item.title"
                 :description="item.description"
                 :currentBid="item.bid"
+                :isSilent="item.isSilent"
             />
         </div>
     </div>
@@ -39,7 +40,8 @@ export default {
                         description: doc.data().description,
                         title: doc.data().title,
                         bid: formatNum(doc.data().price),
-                        image: doc.data().image
+                        image: doc.data().image,
+                        isSilent: doc.data().isSilent
                     };
                     this.list.push(data);
                 }

@@ -12,7 +12,6 @@
         <!-- routes you created in src/router/index.js -->
         <router-link class="rLink button cell small-1" to='/home'>Home</router-link>
         <router-link class="rLink button cell small-1" to='/donate'>Donate</router-link>
-        <router-link class="rLink button cell small-1" to='/item'>Item</router-link>
         <router-link class="rLink button cell small-1" to='/live'>Live</router-link>
         <router-link class="rLink button cell small-1" to='/silent'>Silent</router-link>
         <router-link class="rLink button cell small-1" to='/account'>Account</router-link>
