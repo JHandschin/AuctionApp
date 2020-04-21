@@ -38,9 +38,6 @@ export default {
             'image'],
     data() {
         return {
-            // title: 'Test Title',
-            // description: 'Test Description',
-            // currentBid: '0.00',
             data: {
                 title: "",
                 description: "",
@@ -49,14 +46,6 @@ export default {
         }
     },
     created() {
-        console.log(this.title);
-        // db.collection('Item').get("Bike test")
-        // .then(doc => {
-        //     console.log(doc.data());
-        // })
-        // .catch(error => {
-        //     // //console.log(error.data);
-        // });
     }
 }
 </script>

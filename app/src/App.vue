@@ -5,7 +5,7 @@
         <div class="cell small-6 app-title">Auction House App</div>
         <div class="cell small-6 user-greeting">Welcome: 
           <span v-if="bSignedIn">{{fullName}}</span>
-          <!-- <router-link v-else class="" to='/login'>Sign In</router-link> -->
+          <router-link v-else class="" to='/login'>Sign In</router-link>
         </div>
       </div>
       <div class="nav grid-margin-x">

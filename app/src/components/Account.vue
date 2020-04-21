@@ -1,11 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ greeting }}</h1>
-    
-    <!-- v-for loops through the data received -->
-    <!-- <div v-for="item in itemList" :key="item.id">
-      <div class="button" @click="update(item)">Name: {{item.userName}} Email: {{item.email}}</div>
-    </div> -->
+  
     <div v-if="!makeAuction">
       <div class="grid-x grid-margin-x">
         <div class="cell small-6">
