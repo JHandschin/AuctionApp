@@ -7,7 +7,7 @@
             <div class="item-price">
                 <p id="cur-bid">{{currentBid}} </p>
             </div>
-            <div class="bidding-items">
+            <div v-if="isSilent" class="bidding-items">
                 <input id="bid-amount" type="text" placeholder="Bid Amount"/>
                 <button v-on:click="bid()" class="button">Bid</button>
             </div>
@@ -43,7 +43,8 @@ export default {
     props: ['title',
             'description',
             'currentBid',
-            'image'],
+            'image',
+            'isSilent'],
     methods: {
         bid() {
             let bidAmt = document.getElementById("bid-amount").value;
@@ -61,6 +62,12 @@ export default {
                         price: Number(bidAmt).toString(),
                     });
 
+                    itemRef.update({
+                        winner: this.$store.state.account.userName.toString(),
+                    })
+                    console.log(this.$store.state.account.userName.toString());
+                    // console.log(itemRef.data().winner)
+
                     document.getElementById('cur-bid').innerHTML = formatNum(bidAmt);
                     document.getElementById('bid-amount').value = '';
 
@@ -77,7 +84,8 @@ export default {
             data: {
                 title: "title",
                 description: "description",
-                currentBid: "0.00"
+                currentBid: "0.00",
+                isSilent: true
             },
         }
     },

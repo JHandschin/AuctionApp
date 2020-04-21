@@ -7,7 +7,9 @@
       <button @click="adminToggle=!adminToggle,verifyToggle=false,auctionToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Approve Admin</button>
       <button @click="presenterToggle=!presenterToggle,verifyToggle=false,adminToggle=false,auctionToggle=false,startStop=false" class="button cell auto">Approve Presenters</button>
       <button @click="auctionToggle=!auctionToggle,verifyToggle=false,adminToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Approve Auction</button>
-      <button @click="startStop=!startStop,verifyToggle=false,adminToggle=false,presenterToggle=false,auctionToggle=false" class="button cell auto">Start/Stop Auction</button>
+
+      <button @click="startStop=!startStop,verifyToggle=false,adminToggle=false,presenterToggle=false,auctionToggle=false" class="button cell auto">Approve Auction</button>
+      <button @click="markWinners=!markWinners,startStop=false,verifyToggle=false,adminToggle=false,presenterToggle=false,auctionToggle=false" class="button cell auto">Live Winners</button>
     </div>
 
     <div v-if="verifyToggle">
@@ -122,6 +124,22 @@
       </ul>
     </div>
 
+    <div v-if="markWinners">
+      <div class="grid-x grid-margin-x list-heading">
+        <div class="cell small-4">Item</div>
+        <div class="cell small-4">Price</div>
+        <div class="cell small-4">Winner</div>
+      </div>
+      <ul v-for="item in liveItemsList" :key="item.id">
+        <div class="grid-x grid-margin-x row">
+          <div class="cell small-4">{{item.title}}</div>
+          <div class="cell small-4">{{item.price}}</div>
+          <div class="cell small-3"><input type=text></div>
+          <div><button class="button vert-align">Submit</button></div>
+        </div>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -139,6 +157,8 @@ export default {
           presenterToggle: false,
           auctionToggle: false,
           startStop: false,
+          markWinners: false,
+          liveItems: [],
           items: [],
           users: [],
           presenters: [],
@@ -224,6 +244,9 @@ export default {
     },
     auctionList() {
       return this.auctions;
+    },
+    liveItemsList() {
+      return this.liveItems;
     }
   },
   watch: {
@@ -290,6 +313,24 @@ export default {
         .catch(function(error) {
             console.log("Error getting documents: ", error);
         });
+      }
+    },
+    markWinners() {
+      if (this.markWinners === true) {
+        this.liveItems = [];
+        console.log("items received.");
+        db.collection("Item").where("isSilent", "==", false).get()
+        .then(querySnapshot => {
+          querySnapshot.forEach((doc) => {
+            const item = doc.data();
+            item['id'] = doc.id;
+            this.liveItems.push(item);
+            console.log("pushed item: ", item);
+          })
+        })
+        .catch(error => {
+          console.log("Error: ", error);
+        })
       }
     }
   },

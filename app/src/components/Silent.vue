@@ -16,6 +16,7 @@
                     {{item.date}} {{item.school}}
                 </option>
             </select>
+
         </div>
     </div>
 </template>
@@ -86,6 +87,20 @@ export default {
                 console.log("Auctions List: ", doc.id, " => ", item);
               // }
             });
+
+            querySnapshot.forEach(doc => {
+                //console.log(doc.data());
+                if (doc.data().isSilent) {
+                    const data = {
+                        description: doc.data().description,
+                        title: doc.data().title,
+                        bid: formatNum(doc.data().price),
+                        image: doc.data().image,
+                        isSilent: doc.data().isSilent
+                    };
+                    this.list.push(data);
+                }
+            })
         })
         .catch(function(error) {
             console.log("Error getting documents: ", error);

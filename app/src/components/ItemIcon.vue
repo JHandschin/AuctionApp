@@ -13,7 +13,8 @@
                     params: { 
                         title: title,
                         description: description,
-                        currentBid: currentBid
+                        currentBid: currentBid,
+                        isSilent: isSilent,
                     } 
                 }">
                 {{title}}
@@ -35,17 +36,20 @@ export default {
     props: ['title',
             'description',
             'currentBid',
-            'image'],
+            'image',
+            'isSilent'],
     data() {
         return {
             data: {
                 title: "",
                 description: "",
                 currentBid: "",
+                isSilent: true,
             }
         }
     },
     created() {
+
     }
 }
 </script>
