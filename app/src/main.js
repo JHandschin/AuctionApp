@@ -25,6 +25,10 @@ let store = new Vuex.Store({
       isAdmin: false,
       isPresenter: false,
       bids: [],
+    },
+    auction: {
+      initialized: false,
+      data: [],
     }
   },
   getters: {

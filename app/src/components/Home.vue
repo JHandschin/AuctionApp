@@ -1,14 +1,4 @@
 <template>
-  <!-- <div class="hello">
-    <h1>{{ greeting }}</h1>
-    
-    v-for loops through the data received
-    <div v-for="item in itemList" :key="item.id">
-      <div>Title: {{item.title}} Description: {{item.description}}</div>
-    </div>
-
-  </div> -->
-
   <div class="grid-container">
     <div class="x-grid">
       <!-- <h1>{{ msg }}</h1> -->

@@ -28,7 +28,7 @@ export default {
     name: 'Login',
     data() {
         return {
-            userName: "MasterAdmin",
+            userName: "Client",
             userPassword: "password",
             msg: '',
         }
@@ -61,7 +61,7 @@ export default {
             })
             .catch((error) => {
                 console.log(error);
-                this.msg = 'a new msg';
+                this.msg = 'failed: ',error;
             })
         }
     }

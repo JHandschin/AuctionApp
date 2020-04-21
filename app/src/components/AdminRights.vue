@@ -4,9 +4,10 @@
 
     <div class="grid-x grid-margin-x">
       <button @click="verifyToggle=!verifyToggle,adminToggle=false,auctionToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Verify Items</button>
-      <button @click="adminToggle=!adminToggle,verifyToggle=false,auctionToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Adminerize Users</button>
-      <button @click="presenterToggle=!presenterToggle,verifyToggle=false,adminToggle=false,auctionToggle=false,startStop=false" class="button cell auto">Presenterize Users</button>
+      <button @click="adminToggle=!adminToggle,verifyToggle=false,auctionToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Approve Admin</button>
+      <button @click="presenterToggle=!presenterToggle,verifyToggle=false,adminToggle=false,auctionToggle=false,startStop=false" class="button cell auto">Approve Presenters</button>
       <button @click="auctionToggle=!auctionToggle,verifyToggle=false,adminToggle=false,presenterToggle=false,startStop=false" class="button cell auto">Approve Auction</button>
+
       <button @click="startStop=!startStop,verifyToggle=false,adminToggle=false,presenterToggle=false,auctionToggle=false" class="button cell auto">Approve Auction</button>
       <button @click="markWinners=!markWinners,startStop=false,verifyToggle=false,adminToggle=false,presenterToggle=false,auctionToggle=false" class="button cell auto">Live Winners</button>
     </div>
@@ -16,18 +17,22 @@
         <div class="cell small-2">User</div>
         <div class="cell small-2">Email</div>
         <div class="cell small-2">Title</div>
-        <div class="cell small-2">Price</div>
-        <div class="cell auto">Description</div>
-        <div class="cell small-2">Approve</div>
+        <div class="cell small-1">Price</div>
+        <div class="cell small-2">Description</div>
+        <div class="cell auto">Approve</div>
       </div>
       <ul v-for="item in itemsList" :key='item.uid'>
         <div class="grid-x grid-margin-x row">
           <div class="cell small-2">{{item.name}} </div>
           <div class="cell small-2">{{item.email}}</div>
           <div class="cell small-2">{{item.title}}</div>
-          <div class="cell small-2">{{item.price | priceFilter}}</div>
+          <div class="cell small-1">{{item.price | priceFilter}}</div>
           <div class="cell small-2 small">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
-          <div class="cell small-2"><button @click="verifyItem(item)" class="button vert-align">Verify</button></div>
+          <div class="cell auto">
+            <button @click="verifyItem(item)" class="button vert-align success">Verify</button>
+            <button @click="editItem(item)" class="button vert-align">Edit</button>
+            <button @click="deleteItem(item)" class="button vert-align alert">Delete</button>
+          </div>
         </div>
       </ul>
     </div>
@@ -37,7 +42,7 @@
         <div class="cell small-2">Username</div>
         <div class="cell small-2">Full Name</div>
         <div class="cell small-2">Email</div>
-        <div class="cell small-2">Presenter</div>
+        <div class="cell small-2">Admin</div>
         <div class="cell auto">Phone</div>
         <div class="cell small-2">Approve</div>
       </div>
@@ -173,6 +178,19 @@ export default {
     }
   },
   methods: {
+    startAuction(item) {
+      const itemRef = db.collection("Auction").doc(item.id);
+      const setWithMerge = itemRef.set({
+        isActive: true
+      }, {merge: true });
+    },
+    endAuction(item) {
+      const itemRef = db.collection("Auction").doc(item.id);
+      const setWithMerge = itemRef.set({
+        isActive: false,
+        closed: true,
+      }, {merge: true });
+    },
     verifyItem(item) {
       this.items.splice(this.items.findIndex(obj => obj.uid === item.uid),1);
       const itemRef = db.collection("Item").doc(item.uid);

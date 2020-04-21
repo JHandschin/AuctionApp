@@ -1,14 +1,3 @@
-
-<!-- <!doctype html> -->
-<!-- <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate</title>
-    <link rel="stylesheet" href="assets/app.css">
-  </head>
-<body> -->
 <template>
 <div class="grid-container">
   <div class="content">
@@ -21,29 +10,15 @@
   </div>
   <div class="grid-x grid-margin-x">
     <div class="cell small-12">
-      <label>Name
-        <input v-model="name" type="text" name="name" id="name" placeholder="Bike" aria-describedby="exampleHelpTextNumber">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
+      <label>School
+        <select v-model="school">
+          <option v-for="item in schoolList" :key="item.id" v-bind:value='{"id" : item.id}' >
+            {{item.date}} {{item.school}}
+          </option>
+        </select>
       </label>
     </div>
-    <div class="cell small-12">
-      <label>Phone Number
-        <input v-model="phone" type="text" name="phone" id="phone" placeholder="(435)590-1234" aria-describedby="exampleHelpTextNumber" required pattern="number">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
-      </label>
-    </div>
-    <div class="cell small-12">
-      <label>Email
-        <input v-model="email" type="text" name="email" id="email" placeholder="john.doe@gmail.com" aria-describedby="exampleHelpTextNumber">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
-      </label>
-    </div>
+
     <div class="cell small-12">
       <label>Item Title
         <input v-model="title" type="text" name="title" id="title" placeholder="Bike" aria-describedby="exampleHelpTextNumber">
@@ -68,8 +43,37 @@
           </span>
         </label>
       </div>
+    
+
+<!-- <div v-if="!initialized" class="grid-x grid-margin-x"> -->
+    <div class="cell small-12">
+      <label>Name
+        <input v-model="name" type="text" name="name" id="name" placeholder="Name" aria-describedby="exampleHelpTextNumber">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+    </div>
+    <div class="cell small-12">
+      <label>Phone Number
+        <input v-model="phone" type="text" name="phone" id="phone" placeholder="(435)590-1234" aria-describedby="exampleHelpTextNumber" required pattern="number">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+    </div>
+    <div class="cell small-12">
+      <label>Email
+        <input v-model="email" type="text" name="email" id="email" placeholder="john.doe@gmail.com" aria-describedby="exampleHelpTextNumber">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+    </div>
+<!-- </div> -->
+
       <div class="cell medium-12">
-        <label for="exampleFileUpload" class="button">Upload File</label>
+        <label for="exampleFileUpload" class="button">Upload Picture</label>
         <input type="file" id="exampleFileUpload" class="show-for-sr">
       </div>
       <div class="grid-x grid-margin-x">
@@ -82,7 +86,7 @@
   </div>
   <div class="grid-x grid-margin-x">
     <fieldset class="cell medium-12">
-      <button v-if="name !==''" @click="submit" class="button float-left">Submit</button>
+      <button @click="submit" class="button float-left">Submit</button>
     </fieldset>
   </div>
 
@@ -92,6 +96,7 @@
 </template>
 
 <script>
+const admin = require('firebase/app');
 import db from '../firebase';
 require('firebase/firestore');
 
@@ -106,11 +111,21 @@ export default {
             title: '',
             description: '',
             isSilent: true,
+            schools: [],
+            school: '',
+            today: '',
+            initialized: '',
         }
+    },
+    computed: {
+      schoolList() {
+        return this.schools;
+      }
     },
     methods: {
       submit() {
-        ////console.log(this.isSilent);
+        // console.log("storethis.$store.state.auction.data);
+        
         const payload = {
           name: this.name,
           phone: this.phone,
@@ -120,6 +135,7 @@ export default {
           description: this.description,
           isSilent: this.isSilent,
           isVerified: false,
+          auctionID: this.school.id,
         }
         db.collection('Item').doc(this.title).set(payload).then(function() {
             //console.log('success');
@@ -134,10 +150,34 @@ export default {
 
         alert("Item successfully submitted.");
       }
+    },
+    created() {
+      this.initialized = this.$store.state.initialized;
+      let d = new Date();
+      d.setMilliseconds(Date.now());
+      this.today = d;
+      console.log("today: ",d);
+      console.log(this.today);
+       db.collection("Auction").where("isApproved", "==", true).get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((doc) => {
+              // const d = new Date(doc.data().date);
+              // if (d.getTime() > this.today.getTime()) {
+                const item = doc.data();
+                item["id"] = doc.id;
+                this.schools.push(item);
+                console.log("Auctions List: ", doc.id, " => ", item);
+              // }
+            });
+        })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
     }
 }
 </script>
 <style scoped>
+
   .screen {
     display: none;
   }
