@@ -11,7 +11,6 @@
 <body> -->
 <template>
 <div class="grid-container">
-
   <div class="content">
   <div class="grid-x grid-margin-x">
     <div class="cell">
@@ -124,13 +123,27 @@ export default {
         }
         db.collection('Item').doc(this.title).set(payload).then(function() {
             //console.log('success');
-        })
+        });
+
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("title").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("description").value = "";
+
+        alert("Item successfully submitted.");
       }
     }
 }
 </script>
 <style scoped>
-
+  .screen {
+    display: none;
+  }
+  .screen.active {
+    display: inline-block;
+  }
 </style>
 <!-- <script src="assets/js/app.js"></script>
 </body>

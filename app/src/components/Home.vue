@@ -21,7 +21,7 @@
                   <ItemIcon
                       :title="item.title"
                       :description="item.description"
-                      :currentBid="item.bid"
+                      :currentBid="item.price"
                   />
               </div>
             </div>
@@ -33,9 +33,10 @@
             <div class="item-rows">
               <div class="item-icon" v-for="item in list" :key="item.id">
                   <ItemIcon
+                  v-if="item.winner == userName"
                       :title="item.title"
                       :description="item.description"
-                      :currentBid="item.bid"
+                      :currentBid="item.price"
                   />
               </div>
             </div>
@@ -98,6 +99,8 @@ export default {
           id: doc.id,
           title: doc.data().title,
           description: doc.data().description,
+          price: formatNum(doc.data().price),
+          winner: doc.data().winner,
         }
         this.list.push(data);
       })
@@ -111,6 +114,9 @@ export default {
     itemList() {
       return this.list;
     },
+    userName() {
+      return this.$store.state.account.userName;
+    }
   },
 };
 </script>
